@@ -1,0 +1,267 @@
+:root {
+    --primary-color: #60a5fa;
+    --primary-dark: #3b82f6;
+    --primary-light: #93c5fd;
+    --primary-gradient: linear-gradient(135deg, #60a5fa, #3b82f6);
+    --secondary-color: #fcfcfc;
+    --accent-color: #f87171;
+    --text-primary: #334155;
+    --text-secondary: #64748b;
+    --text-light: #ffffff;
+    --bg-light: #f1f5f9;
+    --bg-card: #ffffff;
+    --bg-hover: rgba(96, 165, 250, 0.1);
+    --border-radius-sm: 12px;
+    --border-radius-md: 16px;
+    --border-radius-lg: 24px;
+    --border-radius-xl: 30px;
+    --shadow-sm: 0 4px 12px rgba(148, 163, 184, 0.1);
+    --shadow-md: 0 8px 24px rgba(148, 163, 184, 0.15);
+    --transition-fast: all 0.2s ease;
+    --transition-standard: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Inter", sans-serif;
+    background-color: var(--bg-light);
+    color: var(--text-primary);
+}
+
+main {
+    max-width: 1200px;
+    margin: 20px auto 40px;
+    padding: 0 20px;
+}
+
+.search-div {
+    width: 100%;
+    padding: 24px 30px;
+    background-color: var(--bg-card);
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-sm);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: var(--transition-standard);
+}
+
+.search-div:hover {
+    box-shadow: var(--shadow-md);
+}
+
+.search-div h2 {
+    color: var(--text-primary);
+    font-size: 1.4rem;
+}
+
+select {
+    border: 1px solid #e2e8f0;
+    border-radius: var(--border-radius-sm);
+    padding: 10px 16px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    background-color: var(--bg-card);
+    cursor: pointer;
+    transition: var(--transition-fast);
+    outline: none;
+    box-shadow: var(--shadow-sm);
+}
+
+select:hover,
+select:focus {
+    border-color: var(--primary-color);
+}
+
+.main-content {
+    margin-left: 0 !important;
+    width: 100%;
+    background-color: var(--bg-card);
+    border-radius: var(--border-radius-md);
+    margin-top: 24px;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition-standard);
+}
+
+.main-content:hover {
+    box-shadow: var(--shadow-md);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 16px 20px;
+    text-align: left;
+    border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+th {
+    background-color: rgba(96, 165, 250, 0.1);
+    color: var(--primary-dark);
+    font-weight: 600;
+}
+
+tr:last-child td,
+tr:last-child th {
+    border-bottom: none;
+}
+
+tr:hover {
+    background-color: var(--bg-hover);
+}
+
+td {
+    color: var(--text-secondary);
+}
+
+tr th:first-child {
+    width: 40%;
+}
+
+.note-finale {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.high-score {
+    color: #10b981;
+}
+
+.medium-score {
+    color: #f59e0b;
+}
+
+.semester-summary {
+    margin-top: 24px;
+    background-color: var(--bg-card);
+    border-radius: var(--border-radius-md);
+    padding: 24px;
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 20px;
+}
+
+.summary-title {
+    margin-bottom: 16px;
+    color: var(--text-primary);
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.summary-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+}
+
+.stat-card {
+    flex: 1 1 200px;
+    background: var(--bg-card);
+    padding: 16px;
+    border-radius: var(--border-radius-sm);
+    border-left: 4px solid var(--primary-color);
+    box-shadow: var(--shadow-sm);
+}
+
+.stat-card h3 {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.stat-card p {
+    color: var(--text-primary);
+    font-size: 1.6rem;
+    font-weight: 700;
+}
+
+@media (max-width: 768px) {
+    .search-div {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+        padding: 20px;
+        margin-top: 0px !important;
+    }
+
+    .search-div h2 {
+        font-size: 1.2rem;
+    }
+
+    table,
+    thead,
+    tbody,
+    th,
+    td,
+    tr {
+        display: block;
+    }
+
+    thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    tr {
+        margin-bottom: 16px;
+        border-bottom: 2px solid #e2e8f0;
+    }
+
+    tr:last-child {
+        margin-bottom: 0;
+    }
+
+    td {
+        border: none;
+        position: relative;
+        padding: 12px 12px 12px 50%;
+        text-align: right;
+    }
+
+    td:before {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        font-weight: 600;
+        text-align: left;
+    }
+
+    /* Libellés pour mobile */
+    td:nth-of-type(1):before {
+        content: "Module";
+    }
+
+    td:nth-of-type(2):before {
+        content: "Contrôle continu";
+    }
+
+    td:nth-of-type(3):before {
+        content: "Examen final";
+    }
+
+    td:nth-of-type(4):before {
+        content: "Note finale";
+    }
+
+    .summary-stats {
+        flex-direction: column;
+        gap: 16px;
+    }
+ 
+}
