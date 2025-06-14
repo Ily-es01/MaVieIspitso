@@ -9,40 +9,51 @@ class AddEtudiantFieldsToUsersTable extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->unsignedBigInteger('id_filiere')->nullable()->after('id');
-            $table->string('prenom_etudiant')->nullable();
-            $table->string('nom_etudiant')->nullable();
-            $table->string('arabepnom_etudiant')->nullable();
-            $table->string('arabenom_etudiant')->nullable();
-            $table->string('sexe_etudiant')->nullable();
-            $table->date('naissance_date')->nullable();
-            $table->string('lieu_naissance')->nullable();
-            $table->string('nationalite')->nullable();
-            $table->string('identite_type')->nullable();
-            $table->string('identite_numero')->nullable();
-            $table->string('adresse')->nullable();
-            $table->string('ville')->nullable();
-            $table->boolean('bourse_status')->default(false);
-            $table->boolean('assurance_status')->default(false);
-            $table->string('bac_serie')->nullable();
-            $table->string('academie')->nullable();
-            $table->string('loisir')->nullable();
-            $table->string('role')->default('etudiant');
+            $table->string('Nom_AR')->nullable();
+            $table->string('Prenom')->nullable();
+            $table->string('Prenom_AR')->nullable();
+            $table->string('Sexe')->nullable();
+            $table->string('Profile_image')->nullable();
+            $table->date('NaissanceDate')->nullable();
+            $table->string('LieuNaissance')->nullable();
+            $table->string('Nationalite')->nullable();
+            $table->string('IdentiteType')->nullable();
+            $table->string('IdentiteNumero')->nullable();
+            $table->string('Adresse')->nullable();
+            $table->string('Ville')->nullable();
+            $table->string('Telephone')->nullable();
+            $table->string('Assurance_status')->nullable();
+            $table->string('Bourse_status')->nullable();
+            $table->string('Code_massar')->nullable();
+            $table->string('BacSerie_etudiant')->nullable();
+            $table->string('Academie')->nullable();
+            $table->string('Loisir')->nullable();
+            $table->string('Annne_bac')->nullable();
+            $table->string('Moyenne_bac')->nullable();
+            $table->unsignedBigInteger('ID_option')->nullable();
+            $table->unsignedBigInteger('ID_filiere')->nullable();
+            $table->unsignedBigInteger('ID_semestre')->nullable();
+            $table->string('Role')->nullable();
 
-            // Foreign key
-            $table->foreign('id_filiere')->references('id_filiere')->on('filieres')->onDelete('set null');
+            $table->foreign('ID_option')->references('ID_option')->on('option');
+            $table->foreign('ID_filiere')->references('ID_filiere')->on('filiere');
+            $table->foreign('ID_semestre')->references('ID_semestre')->on('semestre');
         });
     }
 
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropForeign(['id_filiere']);
+            $table->dropForeign(['ID_option']);
+            $table->dropForeign(['ID_filiere']);
+            $table->dropForeign(['ID_semestre']);
+
             $table->dropColumn([
-                'id_filiere', 'prenom_etudiant', 'nom_etudiant', 'arabepnom_etudiant', 'arabenom_etudiant',
-                'sexe_etudiant', 'naissance_date', 'lieu_naissance', 'nationalite', 'identite_type',
-                'identite_numero', 'adresse', 'ville', 'bourse_status', 'assurance_status',
-                'bac_serie', 'academie', 'loisir', 'role'
+                'Nom_AR', 'Prenom', 'Prenom_AR',
+                'Sexe', 'NaissanceDate', 'LieuNaissance', 'Nationalite',
+                'IdentiteType', 'IdentiteNumero', 'Adresse', 'Ville',
+                'Telephone', 'Assurance_status', 'BacSerie_etudiant', 'Academie',
+                'Loisir', 'ID_option', 'ID_filiere', 'ID_semestre', 'Role'
             ]);
         });
     }

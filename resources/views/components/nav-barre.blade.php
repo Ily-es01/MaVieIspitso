@@ -1,4 +1,7 @@
-     <link rel="stylesheet" href="{{ asset('css/etudiant-style/menu-style.css') }}">
+<?php
+  use Carbon\Carbon;
+?>
+<link rel="stylesheet" href="{{ asset('css/etudiant-style/menu-style.css') }}">
      <!-- Header for mobile -->
      <header>
         <button class="menu-toggle-button" id="menu-active" aria-label="Open Menu" aria-expanded="false">
@@ -8,10 +11,6 @@
             <i class="fa-solid fa-graduation-cap"></i> MaVieISPITSO
         </div>
         <div class="user-actions">
-            <button class="icon-button" aria-label="Notifications" style="position: relative;">
-                <i class="fa-solid fa-bell"></i>
-                <span class="badge-notification">3</span>
-            </button>
             <button class="icon-button" aria-label="User Profile">
                 <i class="fa-solid fa-user"></i>
             </button>
@@ -54,22 +53,20 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ url('/profile') }}" class="nav-item {{ request()->routeIs('profile') ? 'active' : '' }}">
+                    <a href="{{ route('profile.edit', ['id' => Auth::user()->id]) }}" class="nav-item {{ request()->routeIs('profile') ? 'active' : '' }}">
                         <i class="fa-solid fa-user"></i> Mon compte
-                    </a>
-                </li>
-                <li>
-                    <a href="#" class="nav-item">
-                        <i class="fa-solid fa-bell"></i> Mes notifications
-                        <span class="badge badge-primary" style="margin-left: auto;">3</span>
                     </a>
                 </li>
             </ul>
         </div>
         <div class="mobile-footer">
-            <button class="logout-button">
-                <i class="fa-solid fa-right-from-bracket"></i> Se déconnecter
-            </button>
+            <form style="width: 100%" method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit" class="logout-button">
+                    <i class="fa-solid fa-right-from-bracket"></i> Se déconnecter
+                </button>
+            </form>
+
         </div>
     </nav>
 
@@ -81,13 +78,13 @@
         <div class="desktop-menu-content">
             <ul>
                 <li>
-                    <a href="{{ url('/home') }}" class="desktop-nav-item {{ request()->routeIs('index') ? 'active' : '' }}">
+                    <a href="{{ url('/etudiant/home') }}" class="desktop-nav-item {{ request()->routeIs('etudiant.index') ? 'active' : '' }}">
                         <i class="fa-solid fa-house"></i>
                         <span class="label">Accueil</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{ url('/notes') }}" class="desktop-nav-item {{ request()->routeIs('notes') ? 'active' : '' }}">
+                    <a href="{{ url('/notes') }}" class="desktop-nav-item {{ request()->routeIs('etudiant.notes') ? 'active' : '' }}">
                         <i class="fa-solid fa-marker"></i>
                         <span class="label">Mes Notes</span>
                     </a>
@@ -105,22 +102,15 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ url('/profile') }}" class="desktop-nav-item {{ request()->routeIs('profile') ? 'active' : '' }}">
+                    <a href="{{ route('profile.edit', ['id' => Auth::user()->id]) }}" class="desktop-nav-item {{ request()->routeIs('profile.edit','profile.edit','etudiants.update') ? 'active' : '' }}">
                         <i class="fa-solid fa-user"></i>
                         <span class="label">Mon compte</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" class="desktop-nav-item" style="position: relative;">
-                        <i class="fa-solid fa-bell"></i>
-                        <span class="label">Mes notifications</span>
-                        <span class="badge badge-primary" style="margin-left: auto;">3</span>
                     </a>
                 </li>
             </ul>
         </div>
         <div class="desktop-footer">
-          
+
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
 
@@ -133,10 +123,12 @@
         </div>
     </nav>
      <main>
+        @auth
         <div class="name-displayer">
-            <h1>Bonjour, Ilyes Amrani</h1> 
-            <p>Lundi 01 janvier 2025</p>
+            <h1>Bonjour, {{ Auth::user()->Prenom }} {{Auth::user()->name}}</h1>
+            <p>{{ Carbon::now()->locale('fr')->isoFormat('dddd DD MMMM YYYY')}}</p>
         </div>
+        @endauth
     </main>
 
     <script src="{{ asset('js/etudiant-js/menus-script.js') }}"></script>

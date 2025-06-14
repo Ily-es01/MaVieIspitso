@@ -64,29 +64,51 @@
             border-radius: 10px;
         }
 
-        .pagination{
-            text-align: center;
-            margin-top: 20px;
-            margin-bottom: 10px;
-        }
+      .pagination {
+    margin-top: 25px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+}
 
-        .pagination a {
-            text-decoration: none;
-            padding: 15px;
-            color: black;
-        }
+.pagination nav {
+    display: flex;
+    justify-content: center;
+}
 
-        .pagination a.active{
-            background-color: #3b82f6;
-            color: white ;
-            border-radius: 5px;
-        }
+.pagination ul {
+    display: flex;
+    list-style-type: none;
+    gap: 5px;
+    padding: 0;
+    margin: 0;
+}
 
-        .pagination a:hover:not(.active){
-            background-color: rgb(216, 215, 215);
-            border-radius: 5px;
-            transition: var(--transition-standard);
-        }
+.pagination li {
+    display: flex;
+}
+
+.pagination .page-link {
+    padding: 4px 10px;
+    border-radius: 6px;
+    color: #555;
+    text-decoration: none;
+    transition: var(--transition-standard);
+}
+
+.pagination a.page-link:hover {
+    background-color: #f5f5f5;
+}
+
+.pagination .active .page-link {
+    background-color: #2563eb;
+    color: white;
+}
+
+.pagination .disabled .page-link {
+    color: #ccc;
+    pointer-events: none;
+}
+
     </style>
     <title>Document</title>
 </head>
@@ -95,49 +117,26 @@
 
     <main style="margin-top : 20px; margin-bottom:20px;display:flex; align-items:center; flex-direction:column;">
 
-            
-        <div class="annonce">
+        @foreach ($annonces as $annonce )
+             <div class="annonce">
             <div class="annonce-header">
-                <img src="{{ asset('images/enseignant-images/smiling-showing-one-male-teacher-wearing-glasses-holding-number-fans-sitting-table-with-school-tools-classroom.jpg') }}">
+                <img src="{{ asset('images/enseignant-images/'.$annonce->user->Profile_image) }}">
                 <div class="user-info">
-                    <span>Abdelhafid Serghini</span>
-                    <span>02 Mai 2025</span>
+                    <span>{{$annonce->user->name}} {{$annonce->user->Prenom}}</span>
+                    <span>{{ \Carbon\Carbon::parse($annonce->Date_annonce)->locale('fr')->isoFormat('D MMMM Y') }}
+</span>
                 </div>
-                
+
             </div>
             <div class="annonce-content">
-                Bonjour,
-                Pour les étudiants qui sont sous mon encadrement en PFE et qui ne sont pas présents oujourd'hui dans la séance de PFE doivent se présenter demain au bureau du département à 15h 15.
+                {{ $annonce->Contenu_annonce }}
             </div>
         </div>
 
-            <div class="annonce">
-                <div class="annonce-header">
-                    <img src="{{ asset('images/enseignant-images/elegant-young-teacher-with-brunette-hair-stylish-light-shirt-black-striped-suit-glasses-holding-writings-pen-giving-lecture.jpg') }}">
-                    <div class="user-info">
-                        <span>Ibrahim Faraji</span>
-                        <span>19 Avril 2025</span>
-                    </div>
-                    
-                </div>
-                <div class="annonce-content">
-                    Pour le DS, il aura lieu de 12h00 à 13h00, salle 72.
-    
-                    Il portera sur la réunion, le rapport et le compte-rendu. Il faut donc réviser TOUS les documents qui ont été envoyés sur ces sujets.<br>
-                    
-                    Bon courage !
-                </div>
-            </div>
-
-            <div class="pagination">
-                <a href="#"><</a>
-                <a href="#" class="active">1</a>
-                <a href="#">2</a>
-                <a href="#">3</a>
-                <a href="#">4</a>
-                <a href="#">></a>
-            </div>
-
+        @endforeach
+        <div class="pagination">
+            {{ $annonces->links('vendor.pagination.bootstrap-5') }}
+        </div>
 
 
 

@@ -4,123 +4,116 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreateAllIspitsTables  extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
-        // Table Filières
-        Schema::create('filieres', function (Blueprint $table) {
-            $table->id('id_filiere');
-            $table->string('nom_filiere');
-            $table->timestamps();
+        Schema::create('filiere', function (Blueprint $table) {
+            $table->id('ID_filiere');
+            $table->string('Nom_filiere');
         });
 
-        // Table Options
-        Schema::create('options', function (Blueprint $table) {
-            $table->id('id_option');
-            $table->unsignedBigInteger('id_filiere');
-            $table->string('nom_option');
-            $table->foreign('id_filiere')->references('id_filiere')->on('filieres')->onDelete('cascade');
-            $table->timestamps();
+        Schema::create('option', function (Blueprint $table) {
+            $table->id('ID_option');
+            $table->unsignedBigInteger('ID_filiere');
+            $table->string('Nom_option');
+            $table->foreign('ID_filiere')->references('ID_filiere')->on('filiere');
         });
 
-        // Table Enseignants
-        Schema::create('enseignants', function (Blueprint $table) {
-            $table->id('id_enseignant');
-            $table->string('nom_enseignant');
-            $table->string('prenom_enseignant');
-            $table->string('email_enseignant')->unique();
-            $table->string('password_enseignant');
-            $table->timestamps();
+
+        Schema::create('semestre', function (Blueprint $table) {
+            $table->id('ID_semestre');
+            $table->string('Semestre_numero');
+            $table->date('Semestre_debut');
+            $table->date('Semestre_fin');
         });
 
-        // Table Modules
-        Schema::create('modules', function (Blueprint $table) {
-            $table->id('id_module');
-            $table->unsignedBigInteger('id_enseignant')->nullable();
-            $table->string('nom_module');
-            $table->float('coefficient');
-            $table->integer('semestre');
-            $table->string('type_module');
-            $table->integer('volume_horaire');
-            $table->foreign('id_enseignant')->references('id_enseignant')->on('enseignants')->onDelete('set null');
-            $table->timestamps();
+
+        Schema::create('module', function (Blueprint $table) {
+            $table->id('ID_module');
+            $table->unsignedBigInteger('ID_semestre');
+            $table->unsignedBigInteger('ID_utilisateur');
+            $table->string('Nom_module');
+            $table->string('Type');
+            $table->integer('Volume_module')->nullable();
+            $table->decimal('Coefficient_module', 5, 2)->nullable();
+            $table->foreign('ID_semestre')->references('ID_semestre')->on('semestre');
+            $table->foreign('ID_utilisateur')->references('id')->on('users');
         });
 
-        // Table Notes
-        Schema::create('notes', function (Blueprint $table) {
-            $table->id('id_note');
-            $table->unsignedBigInteger('id_etudiant');
-            $table->unsignedBigInteger('id_module');
-            $table->float('valeur_note')->nullable();
-            $table->float('session_note')->nullable();
-            $table->float('controle_note')->nullable();
-            $table->float('exam_note')->nullable();
-            $table->foreign('id_etudiant')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('id_module')->references('id_module')->on('modules')->onDelete('cascade');
-            $table->timestamps();
+        Schema::create('option_utilisateur', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('ID_option');
+            $table->unsignedBigInteger('ID_utilisateur');
+
+            $table->foreign('ID_option')->references('ID_option')->on('option')->onDelete('cascade');
+            $table->foreign('ID_utilisateur')->references('id')->on('users')->onDelete('cascade');
         });
 
-        // Table enseignes_modules (pivot)
-        Schema::create('enseignes_modules', function (Blueprint $table) {
-            $table->unsignedBigInteger('id_option');
-            $table->unsignedBigInteger('id_module');
-            $table->primary(['id_option', 'id_module']);
-            $table->foreign('id_option')->references('id_option')->on('options')->onDelete('cascade');
-            $table->foreign('id_module')->references('id_module')->on('modules')->onDelete('cascade');
+        Schema::create('module_option', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('ID_module');
+            $table->unsignedBigInteger('ID_option');
+
+            $table->foreign('ID_module')->references('ID_module')->on('module')->onDelete('cascade');
+            $table->foreign('ID_option')->references('ID_option')->on('option')->onDelete('cascade');
         });
 
-        // Table Salles
-        Schema::create('salles', function (Blueprint $table) {
-            $table->id('id_salle');
-            $table->string('nom_salle');
-            $table->string('numero_salle');
-            $table->integer('capacite_salle');
-            $table->timestamps();
+
+        Schema::create('annonce', function (Blueprint $table) {
+            $table->id('ID_annonce');
+            $table->unsignedBigInteger('ID_utilisateur');
+            $table->string('Objet_annonce');
+            $table->text('Option_classe');
+            $table->text('Contenu_annonce');
+            $table->timestamp('Date_annonce')->nullable();
+            $table->foreign('ID_utilisateur')->references('id')->on('users');
         });
 
-        // Table Séances
-        Schema::create('seances', function (Blueprint $table) {
-            $table->id('id_seance');
-            $table->unsignedBigInteger('id_module');
-            $table->unsignedBigInteger('id_salle');
-            $table->unsignedBigInteger('id_enseignant');
-            $table->time('heure_debut');
-            $table->time('heure_fin');
-            $table->string('jour');
-            $table->timestamps();
 
-            $table->foreign('id_module')->references('id_module')->on('modules')->onDelete('cascade');
-            $table->foreign('id_salle')->references('id_salle')->on('salles')->onDelete('cascade');
-            $table->foreign('id_enseignant')->references('id_enseignant')->on('enseignants')->onDelete('cascade');
+
+        Schema::create('note', function (Blueprint $table) {
+            $table->id('ID_note');
+            $table->unsignedBigInteger('ID_utilisateur');
+            $table->unsignedBigInteger('ID_module');
+            $table->date('Date_note');
+            $table->float('Valeur_note')->nullable();
+            $table->string('Mention_note')->nullable();
+            $table->text('Type_note')->nullable();
+            $table->string('Session_note')->nullable();
+            $table->foreign('ID_utilisateur')->references('id')->on('users');
+            $table->foreign('ID_module')->references('ID_module')->on('module');
         });
 
-        // Table Annonces
-        Schema::create('annonces', function (Blueprint $table) {
-            $table->id('id_annonce');
-            $table->unsignedBigInteger('id_enseignant');
-            $table->string('objet_annonce');
-            $table->text('contenu_annonce');
-            $table->date('date_annonce');
-            $table->timestamps();
+        Schema::create('salle', function (Blueprint $table) {
+            $table->id('ID_salle');
+            $table->string('Nom_salle');
+            $table->integer('Capacite_salle');
+        });
 
-            $table->foreign('id_enseignant')->references('id_enseignant')->on('enseignants')->onDelete('cascade');
+        Schema::create('seance', function (Blueprint $table) {
+            $table->id('ID_seance');
+            $table->string('jour')->nullable();
+            $table->unsignedBigInteger('ID_salle');
+            $table->unsignedBigInteger('ID_module');
+            $table->unsignedBigInteger('ID_utilisateur');
+            $table->time('HeureDebut_seance');
+            $table->time('HeureFin_seance');
+            $table->foreign('ID_salle')->references('ID_salle')->on('salle');
+            $table->foreign('ID_module')->references('ID_module')->on('module');
+            $table->foreign('ID_utilisateur')->references('id')->on('users');
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('annonces');
-        Schema::dropIfExists('seances');
-        Schema::dropIfExists('salles');
-        Schema::dropIfExists('enseignes_modules');
-        Schema::dropIfExists('notes');
-        Schema::dropIfExists('modules');
-        Schema::dropIfExists('enseignants');
-        Schema::dropIfExists('options');
-        Schema::dropIfExists('filieres');
+        Schema::dropIfExists('seance');
+        Schema::dropIfExists('salle');
+        Schema::dropIfExists('note');
+        Schema::dropIfExists('module');
+        Schema::dropIfExists('annonce');
+        Schema::dropIfExists('semestre');
+        Schema::dropIfExists('option');
+        Schema::dropIfExists('filiere');
     }
-};
+}

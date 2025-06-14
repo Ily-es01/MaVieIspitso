@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <title>Document</title>
+    <title>emploi du temps</title>
     <style>
 
 :root {
@@ -33,56 +33,56 @@
             --transition-fast: all 0.2s ease;
             --transition-standard: all 0.3s ease;
         }
-        
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
+
         body {
             background-color: var(--bg-light);
             color: var(--text-primary);
             line-height: 1.6;
             padding: 20px;
         }
-        
+
         .container {
             width: 100%;
             margin: 0 auto;
         }
-        
+
         h1 {
             text-align: center;
             margin-bottom: 30px;
             color: var(--primary-dark);
         }
-        
+
         .calendar {
             background-color: var(--bg-card);
             border-radius: var(--border-radius-md);
             padding: 20px;
             box-shadow: var(--shadow-sm);
         }
-        
+
         .calendar-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 20px;
         }
-        
+
         .calendar-header h2 {
             color: var(--text-primary);
             font-size: 22px;
         }
-        
+
         .calendar-nav {
             display: flex;
             gap: 10px;
         }
-        
+
         .calendar-nav button {
             background-color: var(--secondary-color);
             border: none;
@@ -93,12 +93,12 @@
             color: var(--text-primary);
             transition: var(--transition-fast);
         }
-        
+
         .calendar-nav button:hover {
             background-color: var(--primary-color);
             color: var(--text-light);
         }
-        
+
         .week-view {
             display: grid;
             grid-template-columns: 80px repeat(6, 1fr);
@@ -108,7 +108,7 @@
             overflow: hidden;
             min-width: 700px;
         }
-        
+
         .time-slot {
             background-color: var(--bg-card);
             padding: 10px;
@@ -119,7 +119,7 @@
             justify-content: center;
             text-align: center;
         }
-        
+
         .day-header {
             background: var(--primary-gradient);
             color: var(--text-light);
@@ -127,7 +127,7 @@
             text-align: center;
             font-weight: bold;
         }
-        
+
         .time-label {
             background-color: var(--text-primary);
             color: var(--text-light);
@@ -136,7 +136,7 @@
             justify-content: center;
             font-weight: bold;
         }
-        
+
         .event {
             background-color: var(--bg-hover);
             border-left: 3px solid var(--primary-color);
@@ -146,42 +146,42 @@
             cursor: pointer;
             transition: var(--transition-fast);
         }
-        
+
         .event.lecture {
             background-color: rgba(96, 165, 250, 0.1);
             border-left-color: var(--primary-color);
         }
-        
+
         .event.lab {
             background-color: rgba(59, 130, 246, 0.1);
             border-left-color: var(--primary-dark);
         }
-        
+
         .event.study {
             background-color: rgba(147, 197, 253, 0.1);
             border-left-color: var(--primary-light);
         }
-        
+
         .event.exam {
             background-color: rgba(248, 113, 113, 0.1);
             border-left-color: var(--accent-color);
         }
-        
+
         .event:hover {
             transform: scale(1.02);
             box-shadow: var(--shadow-sm);
         }
-        
+
         .event .title {
             font-weight: bold;
             margin-bottom: 3px;
         }
-        
+
         .event .time, .event .location {
             font-size: 11px;
             color: var(--text-secondary);
         }
-        
+
         @media (max-width: 768px) {
             .calendar {
                 overflow-x: scroll;
@@ -197,17 +197,17 @@
                 grid-template-columns: 60px repeat(6, 1fr);
                 font-size: 12px;
             }
-            
+
             .day-header, .time-label {
                 padding: 5px;
                 font-size: 12px;
             }
-            
+
             .time-slot {
                 min-height: 50px;
                 padding: 5px;
             }
-            
+
             .event {
                 padding: 5px;
                 font-size: 10px;
@@ -217,197 +217,75 @@
 </head>
 <body>
     <x-nav-barre></x-nav-barre>
-    <main style="margin-top: 20px">
-        <div class="container">            
-            <div class="calendar">
-                
-                <div class="week-view">
-                    <div class="time-label"></div>
-                    <div class="day-header">Lundi</div>
-                    <div class="day-header">Mardi</div>
-                    <div class="day-header">Mercredi</div>
-                    <div class="day-header">Jeudi</div>
-                    <div class="day-header">Vendredi</div>
-                    <div class="day-header">Samedi</div>
-                    
-                    <!-- 8 AM Row -->
-                    <div class="time-label">8:30</div>
-                    <div class="time-slot"></div>
-                    <div class="time-slot">
-                        <div class="event lecture">
-                            <div class="title">
-                                Anatomie et physiologie</div>
-                            <div class="time">8:30 - 9:30</div>
-                            <div class="location">Amphi A</div>
-                        </div>
-                    </div>
-                    <div class="time-slot"></div>
-                    <div class="time-slot">
-                        <div class="event lecture">
-                            <div class="title">
-                                Anatomie et physiologie</div>
-                            <div class="time">8:30 - 9:30</div>
-                            <div class="location">Amphi A</div>
-                        </div>
-                    </div>
-                    <div class="time-slot"></div>
-                    <div class="time-slot"></div>
-                    
-                    <!-- 9 AM Row -->
-                    <div class="time-label">9:30 AM</div>
-                    <div class="time-slot"></div>
-                    <div class="time-slot"></div>
-                    <div class="time-slot"></div>
-                    <div class="time-slot"></div>
-                    <div class="time-slot"></div>
-                    <div class="time-slot">
-                        <div class="event study">
-                            <div class="title">Chimie analytique</div>
-                            <div class="time">9:00 - 11:30</div>
-                            <div class="location">Labo L2</div>
-                        </div>
-                    </div>
-                    
-                    <!-- 10 AM Row -->
-                    <div class="time-label">10:30 AM</div>
-                    <div class="time-slot">
-                        <div class="event lecture">
-                            <div class="title">Biophysique</div>
-                            <div class="time">10:00 - 11:30</div>
-                            <div class="location">Salle 304</div>
-                        </div>
-                    </div>
-                    <div class="time-slot"></div>
-                    <div class="time-slot">
-                        <div class="event lecture">
-                            <div class="title">
-                                TP Microbiologie</div>
-                            <div class="time">10:00 - 11:30</div>
-                            <div class="location">Labo 4</div>
-                        </div>
-                    </div>
-                    <div class="time-slot"></div>
-                    <div class="time-slot">
-                        <div class="event lecture">
-                            <div class="title">
-                                TP Microbiologie</div>
-                            <div class="time">10:00 - 11:30</div>
-                            <div class="location">Labo 4</div>
-                        </div>
-                    </div>
-                    <div class="time-slot"></div>
-                    
-                    <!-- 11 AM Row -->
-                    <div class="time-label">11:30 AM</div>
-                    <div class="time-slot"></div>
-                    <div class="time-slot"></div>
-                    <div class="time-slot"></div>
-                    <div class="time-slot"></div>
-                    <div class="time-slot"></div>
-                    <div class="time-slot"></div>
-                    
-                    <!-- 12 PM Row -->
-                    <div class="time-label">12:30 PM</div>
-                    <div class="time-slot"></div>
-                    <div class="time-slot"></div>
-                    <div class="time-slot"></div>
-                    <div class="time-slot"></div>
-                    <div class="time-slot"></div>
-                    <div class="time-slot"></div>
-                    
-                    <!-- 1 PM Row -->
-                    <div class="time-label">1:30 PM</div>
-                    <div class="time-slot">
-                        <div class="event lab">
-                            <div class="title">Anatomie et physiologie</div>
-                            <div class="time">1:00 - 3:30</div>
-                            <div class="location">Amphi A</div>
-                        </div>
-                    </div>
-                    <div class="time-slot"></div>
-                    <div class="time-slot"></div>
-                    <div class="time-slot">
-                        <div class="event lab">
-                            <div class="title">
-                                Chimie analytique</div>
-                            <div class="time">1:00 - 3:00</div>
-                            <div class="location">Labo L2</div>
-                        </div>
-                    </div>
-                    <div class="time-slot"></div>
-                    <div class="time-slot"></div>
-                    
-                    <!-- 2 PM Row -->
-                    <div class="time-label">2:30 PM</div>
-                    <div class="time-slot"></div>
-                    <div class="time-slot">
-                        <div class="event lecture">
-                            <div class="title">Microbiologie</div>
-                            <div class="time">2:00 - 3:30</div>
-                            <div class="location">Amphi B</div>
-                        </div>
-                    </div>
-                    <div class="time-slot">
-                        <div class="event lecture">
-                            <div class="title">Microbiologie</div>
-                            <div class="time">2:00 - 3:30</div>
-                            <div class="location">Amphi B</div>
-                        </div>
-                    </div>
-                    <div class="time-slot"></div>
-                    <div class="time-slot">
-                        <div class="event lecture">
-                            <div class="title">Anglais</div>
-                            <div class="time">2:00 - 3:30</div>
-                            <div class="location">Salle d4</div>
-                        </div>
-                    </div>
-                    <div class="time-slot"></div>
-                    
-                    <!-- 3 PM Row -->
-                    <div class="time-label">3:30 PM</div>
-                    <div class="time-slot"></div>
-                    <div class="time-slot"></div>
-                    <div class="time-slot"></div>
-                    <div class="time-slot"></div>
-                    <div class="time-slot"></div>
-                    <div class="time-slot"></div>
-                    
-                    <!-- 4 PM Row -->
-                    <div class="time-label">4:30 PM</div>
-                    <div class="time-slot">
-                        <div class="event study">
-                            <div class="title">Digital skills</div>
-                            <div class="time">4:00 - 6:00</div>
-                            <div class="location">Salle tp 01</div>
-                        </div>
-                    </div>
-                    <div class="time-slot"></div>
-                    <div class="time-slot">
-                        <div class="event study">
-                            <div class="title">Digital skills</div>
-                            <div class="time">4:00 - 6:00</div>
-                            <div class="location">Salle tp 01</div>
-                        </div>
-                    </div>
-                    <div class="time-slot"></div>
-                    <div class="time-slot"></div>
-                    <div class="time-slot"></div>
-                    
-                    <!-- 5 PM Row -->
-                    <div class="time-label">5:30 PM</div>
-                    <div class="time-slot"></div>
-                    <div class="time-slot">
+<main style="margin-top: 20px">
+    <div class="container">
+        <div class="calendar">
+            <div class="week-view">
+                <!-- Day Headers -->
+                <div class="time-label"></div>
+                @foreach($jours as $jour)
+                    <div class="day-header">{{ $jour }}</div>
+                @endforeach
 
-                    </div>
-                    <div class="time-slot"></div>
-                    <div class="time-slot"></div>
-                    <div class="time-slot"></div>
-                    <div class="time-slot"></div>
-                </div>
+                <!-- Time Slots -->
+                @foreach($timeSlots as $slotIndex => $timeSlot)
+                    <div class="time-label">{{ \Carbon\Carbon::createFromFormat('H:i:s', $timeSlot)->format('g:i A') }}</div>
+
+                    @foreach($jours as $jour)
+                        @php
+                            $hasSeance = false;
+                            $skipRender = false;
+
+                            // Check if there's a session that starts at this time slot
+                            foreach($seancesByDay[$jour] as $seance) {
+                                $seanceId = $seance->ID_seance;
+                                $span = $seanceSpans[$seanceId];
+
+                                // If this is the starting slot for this session
+                                if ($span['startSlot'] === $slotIndex) {
+                                    $hasSeance = true;
+                                    $currentSeance = $seance;
+                                    break;
+                                }
+
+                                // If this slot is covered by a session that started earlier
+                                if ($slotIndex > $span['startSlot'] && $slotIndex <= $span['endSlot']) {
+                                    $skipRender = true;
+                                    break;
+                                }
+                            }
+                        @endphp
+
+                        @if($skipRender)
+                            <!-- This cell is covered by a session that started in an earlier slot -->
+                        @else
+                            @if($hasSeance)
+                                @php
+                                    $rowspan = $seanceSpans[$currentSeance->ID_seance]['rowspan'];
+                                    $typeClass = $currentSeance->module->Type_module == 'TP' ? 'lab' :
+                                                ($currentSeance->module->Type_module == 'Cours' ? 'lecture' : 'study');
+                                @endphp
+                                <div class="time-slot" style="grid-row: span {{ $rowspan }};">
+                                    <div class="event {{ $typeClass }}">
+                                        <div class="title">{{ $currentSeance->module->Nom_module }}</div>
+                                        <div class="time">
+                                            {{ \Carbon\Carbon::createFromFormat('H:i:s', $currentSeance->HeureDebut_seance)->format('g:i') }} -
+                                            {{ \Carbon\Carbon::createFromFormat('H:i:s', $currentSeance->HeureFin_seance)->format('g:i') }}
+                                        </div>
+                                        <div class="location">{{ $currentSeance->salle->Nom_salle }}</div>
+                                        <div class="professor">Prof: {{ $currentSeance->user->name }}</div>
+                                    </div>
+                                </div>
+                            @else
+                                <div class="time-slot"></div>
+                            @endif
+                        @endif
+                    @endforeach
+                @endforeach
             </div>
         </div>
-    </main>
+    </div>
+</main>
     <script src="{{ asset('js/etudiant-js/menus-script.js') }}"></script>
 </body>
 </html>

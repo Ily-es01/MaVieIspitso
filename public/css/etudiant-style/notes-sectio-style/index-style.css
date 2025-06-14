@@ -248,14 +248,20 @@ tr th:first-child {
     }
 
     td:nth-of-type(2):before {
-        content: "Contrôle continu";
+        content: "Coefficent";
     }
 
     td:nth-of-type(3):before {
-        content: "Examen final";
+        content: "Controle continue";
     }
 
     td:nth-of-type(4):before {
+        content: "Examen final";
+    }
+    td:nth-of-type(5)::before{
+        content: "Rattrapage";
+    }
+    td:nth-of-type(6)::before{
         content: "Note finale";
     }
 
@@ -263,5 +269,5 @@ tr th:first-child {
         flex-direction: column;
         gap: 16px;
     }
- 
+
 }

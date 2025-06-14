@@ -21,6 +21,40 @@
     --transition-standard: all 0.3s ease;
 }
 
+
+            /* Width and height of the entire scrollbar */
+        .desktop-menu-content::-webkit-scrollbar {
+        width: 5px;
+        height: 10px;
+        }
+
+        /* Track (the area the scrollbar thumb moves along) */
+        .desktop-menu-content::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 10px;
+        }
+
+        /* Handle (the draggable part) */
+        .desktop-menu-content::-webkit-scrollbar-thumb {
+        background: #888;
+        border-radius: 10px;
+        }
+
+        /* Handle on hover */
+        .desktop-menu-content::-webkit-scrollbar-thumb:hover {
+        background: #555;
+        }
+
+        /* Buttons on scrollbar (arrows pointing upwards and downwards) */
+        .desktop-menu-content::-webkit-scrollbar-button {
+        display: none;  /* hide buttons by default */
+        }
+
+        /* Corner where horizontal and vertical scrollbars meet */
+        .desktop-menu-content::-webkit-scrollbar-corner {
+        background: #f1f1f1;
+        }
+
             * {
                 margin: 0;
                 padding: 0;
@@ -85,11 +119,13 @@
             .info-section {
                 display: flex;
                 flex-direction: column;
+                  flex-wrap: wrap;       /* autorise le passage à une nouvelle colonne */
+
                 gap: 20px;
                 margin-top: 25px;
             }
 
-          
+
             .section-header {
                 display: flex;
                 align-items: center;
@@ -287,7 +323,7 @@
                 justify-content: center;
             }
 
-            .menu-toggle-button:hover, 
+            .menu-toggle-button:hover,
             .menu-toggle-button:focus {
                 background-color: rgba(255, 255, 255, 0.15);
                 transform: scale(1.05);
@@ -553,7 +589,7 @@
                 color: var(--text-light);
                 font-weight: 700;
                 font-size: 1.2rem;
-                border-radius: 0 0 20px 0;
+                border-radius: 0 00px 0;
             }
 
             .desktop-logo i {
@@ -735,11 +771,11 @@
                     flex-direction: row;
                     justify-content: space-between;
                 }
-                
+
                 .info-section {
                     flex-direction: row;
                 }
-                
+
                 main {
                     margin-top: 10px;
                     margin-left: 120px;
